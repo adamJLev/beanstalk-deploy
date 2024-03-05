@@ -242,7 +242,12 @@ function deployExistingVersion(application, environmentName, versionLabel, waitU
 
 function strip(val) {
     //Strip leadig or trailing whitespace
-    return (val || '').replace(/^\s*|\s*$/g, '');
+    val = (val || '').replace(/^\s*|\s*$/g, '');
+
+    // also strip non-ascii chars
+    val = val.replace(/[^\x00-\x7F]/g, "");
+
+    return val
 }
 
 function main() {
